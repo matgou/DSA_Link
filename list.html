@@ -1,0 +1,70 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Liens</a>
+        </div>
+        <div class="navbar-collapse collapse" id="searchbar">
+		<form class="navbar-form navbar-left" ng-submit="submitSearch()">
+		<form class="navbar-form navbar-left" ng-submit="submitSearch()">
+        <div class="form-group" style="display:table; width:100%">
+          <div class="input-group" style="display:table; width:100%">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+            <input class="form-control" id="search" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text" ng-model="searchText">
+		  </div>
+		  
+        </div>
+		
+		</form>
+		<ul class="nav navbar-nav">
+			<li><a href ng-click="clearSearchText()">Clear</a></li>
+		</ul>
+        
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+		
+		<!-- Example row of columns -->
+      <div class="row row-offcanvas row-offcanvas-right">
+	  <div class="col-xs-12 col-sm-9">
+			<h2>Liens</h2>
+			<p>Ci-dessous les liens : {{ searchText }}</p>
+			<table class="table table-striped">
+				<thead>
+					<tr>
+						<th>Nom</th>
+						
+						<th>tags</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr ng-repeat="link in links | filter:searchText | orderBy:'name'">
+						<td> <a style="font-size: 10px;" href="{{ link.href }}" title="{{ link.href }}" target="_blank" ng-bind-html="link.name | trust"></a></td>
+						
+						<td><span ng-repeat="tag in link.tags"><a href ng-click="updateSearchText(tag)"><span class="label label-info">{{ tag }}</span></a>	&nbsp</span></td>
+					</tr>
+				</tbody>
+			</table>
+        </div>
+		
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar">
+          <div class="list-group">
+			<a href ng-click="clearSearchText()" class="list-group-item {{ pasDeTag }}">Tout  <span class="badge">{{nbTot}}</span></a>
+            <a ng-repeat="tag in tags | orderBy:'-nb'" href ng-click="updateSearchText(tag.name)" class="list-group-item" ng-class="{'active': tag.name==searchText}">{{ tag.name }} <span class="badge">{{tag.nb}}</span></a>
+          </div>
+        </div><!--/.sidebar-offcanvas-->
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2017 MGEN Tech, Inc.</p>
+      </footer>
+    </div> <!-- /container -->
