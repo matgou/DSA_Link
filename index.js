@@ -48,20 +48,45 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
 		if(typeof $scope.listTagRadios === "undefined") {
 			$scope.listTagRadios = 'right';
 		}
+		$scope.dropdownTagRadios = localStorage.getItem("dropdownTag");
+		if(typeof $scope.dropdownTagRadios === "undefined") {
+			$scope.dropdownTagRadios = 'display';
+		}
+		$scope.columnDescriptionRadios = localStorage.getItem("descriptionColumn");
+		if(typeof $scope.columnDescriptionRadios === "undefined") {
+			$scope.columnDescriptionRadios = 'none';
+		}
+		$scope.columnLiensRadios = localStorage.getItem("liensColumn");
+		if(typeof $scope.columnLiensRadios === "undefined") {
+			$scope.columnLiensRadios = 'none';
+		}
+		
 		
 		$scope.saveToSession = function() {
-			console.log($scope.listTagRadios);
 			$window.localStorage.setItem("listTag", $scope.listTagRadios);
+			$window.localStorage.setItem("dropdownTag", $scope.dropdownTagRadios);
+			$window.localStorage.setItem("descriptionColumn", $scope.columnDescriptionRadios);
+			$window.localStorage.setItem("liensColumn", $scope.columnLiensRadios);
 		}
 }])
 .controller('LinkListController', ['$scope','$http', '$routeParams', '$sanitize', '$filter', '$window', function($scope, $http, $routeParams, $sanitize, $filter, $window) {
   // Load from localstorage
   $scope.listTagRadios = localStorage.getItem("listTag");
-	if(typeof $scope.listTagRadios === "undefined") {
-		$scope.listTagRadios = 'right';
-	}
-	
-	
+  if(typeof $scope.listTagRadios === "undefined") {
+	$scope.listTagRadios = 'right';
+  }
+  $scope.dropdownTagRadios = localStorage.getItem("dropdownTag");
+  if(typeof $scope.dropdownTagRadios === "undefined") {
+	$scope.dropdownTagRadios = 'display';
+  }
+  $scope.columnDescriptionRadios = localStorage.getItem("descriptionColumn");
+  if(typeof $scope.columnDescriptionRadios === "undefined") {
+	$scope.columnDescriptionRadios = 'none';
+  }
+  $scope.columnLiensRadios = localStorage.getItem("liensColumn");
+  if(typeof $scope.columnLiensRadios === "undefined") {
+	$scope.columnLiensRadios = 'none';
+  }
 	
   var linksCSV=$http.get('links.csv',{headers : {'Content-Type' : 'text/csv; charset=iso-8859-1'}}).then(function(response) {
 	$scope.links = [];
@@ -82,6 +107,8 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
 		line = allTextLines[i].split(";");
 		link = {};
 		link.name = line[0];
+		line.shift();
+		link.description = line[0];
 		line.shift();
 		link.href = line[0];
 		line.shift();

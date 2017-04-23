@@ -24,6 +24,14 @@
 		<ul class="nav navbar-nav">
 			<li><a href ng-click="clearSearchText()">Clear</a></li>
 			<li><a href="#!/param">Param&egrave;tres</a></li>
+			<li class="nav-item dropdown" ng-if="dropdownTagRadios == 'display'">
+				<a class="nav-link dropdown-toggle" id="navbarDropdownTagList" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				  Filtrer
+				</a>
+				<div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+				  <a ng-repeat="tag in tags | orderBy:'-nb'" href ng-click="updateSearchText(tag.name)" class="list-group-item" ng-class="{'active': tag.name==searchText}">{{ tag.name }} <span class="badge">{{tag.nb}}</span></a>
+				</div>
+			</li>
 		</ul>
         
         </div><!--/.navbar-collapse -->
@@ -42,20 +50,22 @@
           </div>
 		  </div>
 	  <div class="col-xs-12 col-md-{{ listTagRadios == 'none' ? 12 : 9 }}">
-			<h2>Liens</h2>
+			<h2 ng-if="searchText != ''">{{ searchText }}</h2>
 			<p>Ci-dessous les liens : {{ searchText }}</p>
 			<table class="table table-striped">
 				<thead>
 					<tr>
 						<th>Nom</th>
-						
+						<th ng-if="columnDescriptionRadios=='display'">Description</th>
+						<th ng-if="columnLiensRadios=='display'">liens</th>
 						<th>tags</th>
 					</tr>
 				</thead>
 				<tbody>
 					<tr ng-repeat="link in links | filter:searchText | orderBy:'name'">
 						<td> <a style="font-size: 10px;" href="{{ link.href }}" title="{{ link.href }}" target="_blank" ng-bind-html="link.name | trust"></a></td>
-						
+						<td ng-if="columnDescriptionRadios=='display'">{{ link.description }}</td>
+						<td ng-if="columnLiensRadios=='display'"><a style="font-size: 10px;" href="{{ link.href }}" title="{{ link.href }}" target="_blank" ng-bind-html="link.href | trust"></a></th>
 						<td><span ng-repeat="tag in link.tags"><a href ng-click="updateSearchText(tag)"><span class="label label-info">{{ tag }}</span></a>	&nbsp</span></td>
 					</tr>
 				</tbody>

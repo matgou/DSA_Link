@@ -46,7 +46,30 @@
 						<option value="none">La liste des tags n'est pas affich&eacute;.</option>
 					</select>
 				</div>
-			</form></div>
+				<div class="form-group">
+					<label for="dropdownTagRadios">Afficher le menu "Filtrer" dans la bare de navigation :</label>
+					<select id="dropdownTagRadios" class="form-control" ng-model="dropdownTagRadios" ng-change="saveToSession()">
+						<option value="display">Le menu "Filtrer" est affich&eacute;.</option>
+						<option value="none">Le menu "Filtrer" n'est pas affich&eacute;.</option>
+					</select>
+				</div>
+			
+				<div class="form-group">
+					<label for="columnDescriptionRadios">Afficher la description des liens comme colonne</label>
+					<select id="columnDescriptionRadios" class="form-control" ng-model="columnDescriptionRadios" ng-change="saveToSession()">
+						<option value="display">La colonne description est affich&eacute;.</option>
+						<option value="none">La colonne description n'est pas affich&eacute;.</option>
+					</select>
+				</div>
+				<div class="form-group">
+					<label for="columnLiensRadios">Afficher les liens comme colonne</label>
+					<select id="columnLiensRadios" class="form-control" ng-model="columnLiensRadios" ng-change="saveToSession()">
+						<option value="display">La colonne liens est affich&eacute;.</option>
+						<option value="none">La colonne liens n'est pas affich&eacute;.</option>
+					</select>
+				</div>
+			</form>
+			</div>
         </div>
       </div>
 
