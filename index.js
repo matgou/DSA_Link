@@ -44,23 +44,26 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
     }
 ])
 .controller('ParamListController', ['$scope', '$window', function($scope, $window) {
-		$scope.listTagRadios = localStorage.getItem("listTag");
-		if(typeof $scope.listTagRadios === "undefined") {
+		$scope.listTagRadios = $window.localStorage.getItem("listTag");
+		if($scope.listTagRadios == null) {
 			$scope.listTagRadios = 'right';
 		}
-		$scope.dropdownTagRadios = localStorage.getItem("dropdownTag");
-		if(typeof $scope.dropdownTagRadios === "undefined") {
+		$scope.dropdownTagRadios = $window.localStorage.getItem("dropdownTag");
+		if($scope.dropdownTagRadios == null) {
 			$scope.dropdownTagRadios = 'display';
 		}
-		$scope.columnDescriptionRadios = localStorage.getItem("descriptionColumn");
-		if(typeof $scope.columnDescriptionRadios === "undefined") {
+		$scope.columnDescriptionRadios = $window.localStorage.getItem("descriptionColumn");
+		if($scope.columnDescriptionRadios == null) {
 			$scope.columnDescriptionRadios = 'none';
 		}
-		$scope.columnLiensRadios = localStorage.getItem("liensColumn");
-		if(typeof $scope.columnLiensRadios === "undefined") {
+		$scope.columnLiensRadios = $window.localStorage.getItem("liensColumn");
+		if($scope.columnLiensRadios == null) {
 			$scope.columnLiensRadios = 'none';
 		}
-		
+		console.log($scope.listTagRadios);
+		console.log($scope.dropdownTagRadios);
+		console.log($scope.columnDescriptionRadios);
+		console.log($scope.columnLiensRadios);
 		
 		$scope.saveToSession = function() {
 			$window.localStorage.setItem("listTag", $scope.listTagRadios);
@@ -71,23 +74,23 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
 }])
 .controller('LinkListController', ['$scope','$http', '$routeParams', '$sanitize', '$filter', '$window', function($scope, $http, $routeParams, $sanitize, $filter, $window) {
   // Load from localstorage
-  $scope.listTagRadios = localStorage.getItem("listTag");
-  if(typeof $scope.listTagRadios === "undefined") {
+  $scope.listTagRadios = $window.localStorage.getItem("listTag");
+  if($scope.listTagRadios == null) {
 	$scope.listTagRadios = 'right';
   }
-  $scope.dropdownTagRadios = localStorage.getItem("dropdownTag");
-  if(typeof $scope.dropdownTagRadios === "undefined") {
+  $scope.dropdownTagRadios = $window.localStorage.getItem("dropdownTag");
+  if($scope.dropdownTagRadios == null) {
 	$scope.dropdownTagRadios = 'display';
   }
-  $scope.columnDescriptionRadios = localStorage.getItem("descriptionColumn");
-  if(typeof $scope.columnDescriptionRadios === "undefined") {
+  $scope.columnDescriptionRadios = $window.localStorage.getItem("descriptionColumn");
+  if($scope.columnDescriptionRadios == null) {
 	$scope.columnDescriptionRadios = 'none';
   }
-  $scope.columnLiensRadios = localStorage.getItem("liensColumn");
-  if(typeof $scope.columnLiensRadios === "undefined") {
+  $scope.columnLiensRadios = $window.localStorage.getItem("liensColumn");
+  if($scope.columnLiensRadios == null) {
 	$scope.columnLiensRadios = 'none';
   }
-	
+  
   var linksCSV=$http.get('links.csv',{headers : {'Content-Type' : 'text/csv; charset=iso-8859-1'}}).then(function(response) {
 	$scope.links = [];
 	$scope.nbTot = 0;

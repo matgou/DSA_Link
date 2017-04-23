@@ -1,5 +1,5 @@
-test1;http://test1.example.com;Test 1;Categorie 1;Test
-test2;http://test2.example.com;Test 2;Categorie 1;Test
-test3;http://test3.example.com;Test 3;Categorie 2;Test
-test4;http://test4.example.com;Test 4;Categorie 2;Test
-test5;http://test5.example.com;Test 5;Categorie 2;Test
+test1;Une page de test1;http://test1.example.com;Test 1;Categorie 1;Test
+test2;Un test page 2;http://test2.example.com;Test 2;Categorie 1;Test
+test3;Un test 3;http://test3.example.com;Test 3;Categorie 2;Test
+test4;Le 4eme test;http://test4.example.com;Test 4;Categorie 2;Test
+test5;Page 5 de test;http://test5.example.com;Test 5;Categorie 2;Test
