@@ -1,0 +1,58 @@
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Liens</a>
+        </div>
+        <div class="navbar-collapse collapse" id="searchbar">
+		<form class="navbar-form navbar-left" ng-submit="submitSearch()">
+		<form class="navbar-form navbar-left" ng-submit="submitSearch()">
+        <div class="form-group" style="display:table; width:100%">
+          <div class="input-group" style="display:table; width:100%">
+            <span class="input-group-addon"><span class="glyphicon glyphicon-search"></span></span>
+            <input class="form-control" id="search" name="search" placeholder="Search Here" autocomplete="off" autofocus="autofocus" type="text" ng-model="searchText">
+		  </div>
+		  
+        </div>
+		
+		</form>
+		<ul class="nav navbar-nav">
+			<li><a href ng-click="clearSearchText()">Clear</a></li>
+			<li><a href="#!/param">Param&egrave;tres</a></li>	
+		</ul>
+        
+        </div><!--/.navbar-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+		
+		<!-- Example row of columns -->
+      <div class="row row-offcanvas row-offcanvas-right">
+	  <div class="col-xs-12 col-sm-12">
+			<h2>Param&egrave;tres</h2>
+			<div class="container">
+			<form>
+				<div class="form-group">
+					<label for="listTagRadios">Disposition de la liste de tags :</label>
+					<select id="listTagRadios" class="form-control" ng-model="listTagRadios" ng-change="saveToSession()">
+						<option value="right">La liste des tag est affich&eacute; &agrave; droite.</option>
+						<option value="left">La liste des tag est affich&eacute; &agrave; gauche.</option>
+						<option value="none">La liste des tags n'est pas affich&eacute;.</option>
+					</select>
+				</div>
+			</form></div>
+        </div>
+      </div>
+
+      <hr>
+
+      <footer>
+        <p>&copy; 2017 -  Do What The Fuck You Want to Public License.</p>
+      </footer>
+    </div> <!-- /container -->

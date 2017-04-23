@@ -5,6 +5,11 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
       controller:'LinkListController',
       templateUrl:'list.html',
     })
+	.when('/param', {
+      controller:'ParamListController',
+      templateUrl:'param.html',
+		
+	})
 	.when('/:tag', {
       controller:'LinkListController',
       templateUrl:'list.html',
@@ -38,7 +43,26 @@ angular.module('link', ['ngRoute', 'ngSanitize'])
       }
     }
 ])
+.controller('ParamListController', ['$scope', '$window', function($scope, $window) {
+		$scope.listTagRadios = localStorage.getItem("listTag");
+		if(typeof $scope.listTagRadios === "undefined") {
+			$scope.listTagRadios = 'right';
+		}
+		
+		$scope.saveToSession = function() {
+			console.log($scope.listTagRadios);
+			$window.localStorage.setItem("listTag", $scope.listTagRadios);
+		}
+}])
 .controller('LinkListController', ['$scope','$http', '$routeParams', '$sanitize', '$filter', '$window', function($scope, $http, $routeParams, $sanitize, $filter, $window) {
+  // Load from localstorage
+  $scope.listTagRadios = localStorage.getItem("listTag");
+	if(typeof $scope.listTagRadios === "undefined") {
+		$scope.listTagRadios = 'right';
+	}
+	
+	
+	
   var linksCSV=$http.get('links.csv',{headers : {'Content-Type' : 'text/csv; charset=iso-8859-1'}}).then(function(response) {
 	$scope.links = [];
 	$scope.nbTot = 0;
